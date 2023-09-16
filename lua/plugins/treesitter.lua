@@ -1,3 +1,4 @@
+local load_textobjects = false
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
@@ -5,11 +6,14 @@ return {
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "python", "haskell", "json",  },
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "javascript", "typescript", "html", "python", "haskell", "json",  },
+        auto_install = true,
         sync_install = false,                                                                                                    
-        highlight = { enable = true },                                                                                           
-        indent = { enable = true },                                                                                              
-      })                                                                                                                        
+        highlight = { 
+          enable = true ,                                                                                           
+          additional_vim_regex_highlighting = false,                                                                                              
+        },
+    })                                                                                                                        
   end                                                                                                                            
 }                                                                                                                                
                                                                                                                                  

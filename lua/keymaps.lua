@@ -2,6 +2,9 @@ local bind = vim.keymap.set
 local default_opts = {noremap = true, silent = true}
 local opt = vim.opt
 
+
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+
 -----------------------------------------------------------
 -- РЕЖИМЫ
 -----------------------------------------------------------
@@ -12,27 +15,16 @@ bind('i', 'jk', '<Esc>', {noremap = true})
 ----------------------------------------------------------- 
 -- Выключить подсветку поиска через <F3>
 bind('n', '<F3>', ':nohlsearch<CR>', {noremap = true})
--- Fuzzy Search. CTRL+a для поиска по файлам, CTRL+p для поиска по буфферам
-bind('n', '<C-a>', [[ <cmd>lua require('telescope.builtin').find_files()<cr> ]], default_opts)
-bind('n', '<C-p>', [[ <cmd>lua require('telescope.builtin').buffers()<cr> ]], default_opts)
--- <S-F5> Греповский поиск слова под курсором
-bind('n', '<S-F5>', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], default_opts)
--- <S-F4> Греповский поиск слова в модальном окошке
-bind('n', '<S-F4>', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], default_opts)
+-- Сделать автодополнение на Tab
+bind('i', '<Tab>', '<C-p>')
 -----------------------------------------------------------
 -- ФАЙЛЫ
 -----------------------------------------------------------
--- Сделать автодополнение на Tab
-bind('i', '<Tab>', '<C-p>')
-
 -- Переключение между окнами
 bind('n', '<C-J>', '<C-W><C-J>')
 bind('n', '<C-K>', '<C-W><C-K>')
 bind('n', '<C-L>', '<C-W><C-L>')
 bind('n', '<C-H>', '<C-W><C-H>')
-
--- развернуть складку
-bind('n', '<space>', 'za') 
 
 -- " Плагин ALE
 -- nnoremap ]r :ALENextWrap<CR>     " move to the next ALE warning / error
@@ -43,8 +35,12 @@ bind('n', '<space>', 'za')
 -- " Плагин Prettier. Замена команды :Prettier на комбинацию клавиш gp
 -- nnoremap gp :silent %!prettier --stdin-filepath %<CR>
 
--- " Плагин FZF (FZF.vim)
--- nmap ; :Buffers<CR>
--- nmap <Leader>f :Files<CR>
--- nmap <Leader>t :Tags<CR>
+-- " Плагин Telescope
+bind('n', '<leader>;', [[ <cmd>lua require('telescope.builtin').buffers()<cr> ]], default_opts) -- Пробел + ; для поиска по буфферам
+bind('n', '<leader>pf', [[ <cmd>lua require('telescope.builtin').find_files()<cr> ]], default_opts) -- Пробел + pf для поиска по файлам
+bind('n', '<S-F5>', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], default_opts) -- <S-F5> Греповский поиск слова под курсором (Shift + F5)
+bind('n', '<S-F4>', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], default_opts) -- <S-F4> Греповский поиск слова в модальном окошке
+bind('n', '<C-p>', ":Telescope git_files<CR>") -- Fuzzy search through the output of git ls-files command, respects .gitignore
 
+-- Плагин tpope/vim-fugitive
+bind('n', '<leader>gs', vim.cmd.Git) -- Пробел + gs манипуляции с Git
