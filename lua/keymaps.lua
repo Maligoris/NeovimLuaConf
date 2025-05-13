@@ -1,9 +1,8 @@
 local bind = vim.keymap.set
 local default_opts = {noremap = true, silent = true}
+local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 local opt = vim.opt
 
-
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 -----------------------------------------------------------
 -- РЕЖИМЫ
@@ -16,7 +15,10 @@ bind('i', 'jk', '<Esc>', {noremap = true})
 -- Выключить подсветку поиска через <F3>
 bind('n', '<F3>', ':nohlsearch<CR>', {noremap = true})
 -- Сделать автодополнение на Tab
-bind('i', '<Tab>', '<C-p>')
+-- bind('i', '<Tab>', '<C-n>')
+-- bind("i", "<Tab>", 'pumvisible() ? "<C-p>" : "<Tab>"', opts)
+-- bind("i", "<S-Tab>", 'pumvisible() ? "<C-n>" : "<C-h>"', opts)
+
 -----------------------------------------------------------
 -- ФАЙЛЫ
 -----------------------------------------------------------

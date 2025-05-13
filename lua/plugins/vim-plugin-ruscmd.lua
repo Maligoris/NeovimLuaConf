@@ -1,3 +1,1 @@
-return {
-  "powerman/vim-plugin-ruscmd"
-}
+return {"powerman/vim-plugin-ruscmd"}

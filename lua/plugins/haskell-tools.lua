@@ -1,8 +1,5 @@
 return {
   'mrcjkb/haskell-tools.nvim',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-  },
-  branch = '2.x.x', -- Recommended
+  version = '^5', -- Recommended
   ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
 }
